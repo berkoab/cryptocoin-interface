@@ -1,20 +1,25 @@
 <div class="container">
     <h1>Bitcoin Address</h1>
-    <form>
+    <form (ngSubmit)="onSubmit()" #searchForm="ngForm">
       <div class="form-group">
         <label for="address">Address</label>
-        <input type="text" class="form-control" id="address" required>
+        <input type="text" class="form-control" id="address" required
+        [ngModel] name="address"
+        #address="ngModel">
       </div>
-      
+      <div [hidden]="address.valid || address.pristine"
+          class="alert alert-danger">
+          Address is required
+      </div>
       <div class="form-group">
           <label for="fromDate">From Date</label>
           <input [(ngModel)]="fromDate" class="form-control" id="fromDate" name="fromDate"
-             required ngui-datetime-picker date-only="true"/>
+              ngui-datetime-picker date-only="true"/>
       </div>
       <div class="form-group">
           <label for="fromDate">To Date</label>
           <input [(ngModel)]="toDate" class="form-control" id="toDate" name="toDate"
-             required ngui-datetime-picker date-only="true"/>
+              ngui-datetime-picker date-only="true"/>
       </div>
       <div class="form-group">
           <label for="currency">Currencies</label>
@@ -22,8 +27,7 @@
             <option *ngFor="let cur of currencies" [value]="cur">{{cur}}</option>
           </select>
       </div>
-
-      <button type="submit" class="btn btn-success">Submit</button>
+      <button type="submit" class="btn btn-success" [disabled]="!searchForm.form.valid">Submit</button>
  
     </form>
 </div>
