@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TransactionService } from '../transaction.service'
 import { Transaction } from '../transaction'
+import { SearchParams } from '../searchParams';
 
 @Component({
   selector: 'app-prices',
@@ -9,6 +10,7 @@ import { Transaction } from '../transaction'
 })
 export class PricesComponent implements OnInit {
   transactions: Transaction[];
+  @Input() searchParams: SearchParams;
 
   constructor(private transactionService: TransactionService) { }
 

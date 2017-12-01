@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SearchParams } from '../searchParams'
+import { SearchParams } from '../searchParams';
+
 @Component({
   selector: 'app-search-form',
   templateUrl: './search-form.component.html',
@@ -7,7 +8,7 @@ import { SearchParams } from '../searchParams'
 })
 export class SearchFormComponent implements OnInit {
   searchParams: SearchParams;
-
+  finalSearchParams: SearchParams;
   currencies = ['USD', 'CHI'];
 
   constructor() { }
@@ -15,6 +16,8 @@ export class SearchFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(){}
+  onSubmit(){
+    this.finalSearchParams = this.searchParams;
+  }
   
 }
