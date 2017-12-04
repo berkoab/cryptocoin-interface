@@ -7,8 +7,9 @@ import { SearchParams } from '../searchParams';
   styleUrls: ['./search-form.component.css']
 })
 export class SearchFormComponent implements OnInit {
-  searchParams: SearchParams;
-  finalSearchParams: SearchParams;
+  // finalSearchParams: SearchParams;
+  searchParams: SearchParams = new SearchParams;
+  submitted: boolean = false;
   currencies = ['USD', 'CHI'];
 
   constructor() { }
@@ -16,8 +17,17 @@ export class SearchFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(){
-    this.finalSearchParams = this.searchParams;
+  onSubmit(data?:any){
+    this.searchParams.address=data.address;
+    this.searchParams.currency=data.currency;
+    this.submitted=true;
+  }
+
+  storeFromDate(val) {
+    this.searchParams.fromDate=val;
   }
   
+  storeToDate(val) {
+    this.searchParams.toDate=val;
+  }
 }

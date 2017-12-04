@@ -10,6 +10,7 @@ import { SearchParams } from '../searchParams';
 })
 export class PricesComponent implements OnInit {
   transactions: Transaction[];
+  @Input() submitted: boolean;
   @Input() searchParams: SearchParams;
 
   constructor(private transactionService: TransactionService) { }
