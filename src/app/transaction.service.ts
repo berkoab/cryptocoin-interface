@@ -7,7 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class TransactionService {
-  private transactionUrl = 'localhost:8080';
+  private transactionUrl = 'http://localhost:8080';
   constructor(private http: HttpClient) { }
 
   getTransactions(): Observable<Transaction[]> {
@@ -24,6 +24,17 @@ export class TransactionService {
         catchError(this.handleError('getTransactions id=${id}', []))
       );
   }
+
+  getTransactionsByAddressAndDates(address: string, startDate: string, endDate: string, currency: string): Observable<Transaction[]> {
+    let url = `${this.transactionUrl}/info/${address}?currency=${currency}`;
+    if(startDate!=null) url=url+`&fromDate=${startDate}`;
+    if(endDate!=null) url=url+`&toDate=${endDate}`;
+    return this.http.get<Transaction[]>(url)
+      .pipe(
+        catchError(this.handleError('getTransactions id=${id}', []))
+      );
+  }
+  
     /**
    * Handle Http operation that failed.
    * Let the app continue.

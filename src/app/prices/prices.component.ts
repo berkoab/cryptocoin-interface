@@ -1,25 +1,19 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { TransactionService } from '../transaction.service'
 import { Transaction } from '../transaction'
 import { SearchParams } from '../searchParams';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-prices',
   templateUrl: './prices.component.html',
-  styleUrls: ['./prices.component.css']
+  styleUrls: ['./prices.component.css'],
+
 })
 export class PricesComponent implements OnInit {
-  transactions: Transaction[];
-  @Input() submitted: boolean;
-  @Input() searchParams: SearchParams;
+  @Input() transactions: Transaction[];
 
-  constructor(private transactionService: TransactionService) { }
+  constructor() { }
 
-  ngOnInit() {
-  }
-
-  getTransactions(): void {
-    this.transactionService.getTransactions()
-      .subscribe(transactions => this.transactions = transactions);;
-  }
+  ngOnInit() {  }
 }

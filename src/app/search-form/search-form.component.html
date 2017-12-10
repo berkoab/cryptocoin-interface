@@ -29,14 +29,15 @@
             #toDate="ngModel"/>
       </div>
       <div class="form-group">
-          <label for="currency">Currencies</label>
-          <select class="form-control" id="currency" name="currency" ngModel required>
-            <option *ngFor="let cur of currencies" [value]="cur">{{cur}}</option>
+          <label for="currency">Currency</label>
+          <select class="form-control" id="currency" name="currency" [(ngModel)]='selectedCurrency' required>
+            <option *ngFor="let currency of currencies" [value]="currency.currency" [selected]="currency.currency == 'USD'">
+              {{currency.currency}} ({{currency.country}})</option>
           </select>
       </div>
       <button type="submit" class="btn btn-success" [disabled]="!searchForm.form.valid">Submit</button>
  
     </form>
 
-    <app-prices [searchParams]="searchParams" [submitted]="submitted"></app-prices>
+    <app-prices [transactions]="transactions" ></app-prices>
 </div>

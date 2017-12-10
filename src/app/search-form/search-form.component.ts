@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchParams } from '../searchParams';
+import { TransactionService } from '../transaction.service'
+import { Transaction } from '../transaction'
+import {CURRENCIES} from '../currencies'
 
 @Component({
   selector: 'app-search-form',
@@ -7,12 +10,12 @@ import { SearchParams } from '../searchParams';
   styleUrls: ['./search-form.component.css']
 })
 export class SearchFormComponent implements OnInit {
-  // finalSearchParams: SearchParams;
+  transactions: Transaction[];
   searchParams: SearchParams = new SearchParams;
-  submitted: boolean = false;
-  currencies = ['USD', 'CHI'];
-
-  constructor() { }
+  currencies = CURRENCIES;
+  selectedCurrency = 'USD';
+  
+  constructor(private transactionService: TransactionService) { }
 
   ngOnInit() {
   }
@@ -20,7 +23,7 @@ export class SearchFormComponent implements OnInit {
   onSubmit(data?:any){
     this.searchParams.address=data.address;
     this.searchParams.currency=data.currency;
-    this.submitted=true;
+    this.getTransactionsByAddressAndDates();
   }
 
   storeFromDate(val) {
@@ -29,5 +32,11 @@ export class SearchFormComponent implements OnInit {
   
   storeToDate(val) {
     this.searchParams.toDate=val;
+  }
+
+  getTransactionsByAddressAndDates(): void {
+    let sp = this.searchParams;
+    this.transactionService.getTransactionsByAddressAndDates(sp.address, sp.fromDate, sp.toDate, sp.currency)
+      .subscribe(transactions => this.transactions = transactions);
   }
 }
