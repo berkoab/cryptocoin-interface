@@ -12,8 +12,14 @@ import { Observable } from 'rxjs/Observable';
 })
 export class PricesComponent implements OnInit {
   @Input() transactions: Transaction[];
+  @Input() address: String;
+  @Input() currency: String;
 
   constructor() { }
 
   ngOnInit() {  }
+
+  isOutgoing(direction): boolean {
+    return direction=="OUTGOING"
+  }
 }

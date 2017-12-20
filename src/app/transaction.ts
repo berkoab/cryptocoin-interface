@@ -2,6 +2,7 @@ enum Direction {
 }
 
 export class Transaction {
+    trasactionId: string;
     address: string;
     fromAddresses: Array<String>;
     toAddresses: Array<String>;

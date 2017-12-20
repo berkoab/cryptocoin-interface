@@ -1,0 +1,27 @@
+<div *ngIf="transactions">
+<table class="table table-hover table-responsive">
+    <caption>Transaction ID {{transactionId}} in {{currency}}</caption>
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Date</th>
+            <th scope="col">Direction</th>
+            <th scope="col">From Addresses</th>
+            <th scope="col">To Addresses</th>
+            <th scope="col">Bitcoin Amount</th>
+            <th scope="col">Historical Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let transaction of transactions" class="{{isOutgoing(transaction.direction) ? 'danger' : 'success'}}">
+            <td><a href="{{transaction.transactionId}}">#</a></td>
+            <td>{{transaction.date}}</td>
+            <td><i class="{{isOutgoing(transaction.direction) ? 'fas fa-long-arrow-alt-right fa-2x' : 'fas fa-long-arrow-alt-left fa-2x'}}"></i></td>
+            <td><div *ngFor="let address of transaction.fromAddresses">{{address}}</div></td>
+            <td><div *ngFor="let address of transaction.toAddresses">{{address}}</div></td>
+            <td>{{transaction.transactionAmount}}</td>
+            <td>{{transaction.historicalTransactAmount}}</td>  
+        </tr>
+    </tbody>
+</table>
+</div>
